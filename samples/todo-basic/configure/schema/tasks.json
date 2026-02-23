@@ -1,0 +1,13 @@
+{
+  "title": "tasks",
+  "type": "object",
+  "properties": {
+    "tasks_id": { "type": "integer", "constraint": "serial primary key" },
+    "task": { "type": "string", "constraint": "varchar" },
+    "assignee": { "type": "string", "constraint": "varchar" },
+    "due_date": { "type": "string", "constraint": "varchar" },
+    "status": { "type": "string", "constraint": "varchar" }
+  },
+  "required": ["tasks_id", "task", "assignee", "due_date", "status"],
+  "additionalProperties": false
+}

@@ -1,0 +1,18 @@
+    <div [hidden]=isHidden(dataSource.columnNames[__KEY_IDX__])>
+        <mat-form-field floatLabel="always">
+            <mat-label>{{dataSource.columnNames[__KEY_IDX__]}}</mat-label>
+            <mat-select
+                [(ngModel)]="dataSource.item.entity.__REF_ENTITY__"
+                placeholder={{dataSource.item.entity.__REF_ENTITY__.__REF_ENTITY_FIELD__}}
+                [formControl]="validators[__KEY_IDX__].formControl" (blur)="validators[__KEY_IDX__].showError()" required>
+                @for (item of dataSource.item.constraints.__REF_ENTITY__; track $index; let idx =
+                $index) {
+                <mat-option [id]="item.__REF_ENTITY_ID__"
+                    [value]="item">{{item.__REF_ENTITY_FIELD__}}</mat-option>
+                }
+            </mat-select>
+            @if (validators[__KEY_IDX__].formControl.invalid) {
+            <mat-error>{{validators[__KEY_IDX__].message()}}</mat-error>
+            }
+        </mat-form-field>
+    </div>

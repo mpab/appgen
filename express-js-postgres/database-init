@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+import tasks.backend_context as backend_context
+import tasks.db.db_copy_files as db_copy_files
+
+##############################################################################
+
+ctx = backend_context.create_for_init(__file__)
+ctx.exec(db_copy_files)
+
+##############################################################################

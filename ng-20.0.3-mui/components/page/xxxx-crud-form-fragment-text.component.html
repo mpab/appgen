@@ -1,0 +1,12 @@
+    <div [hidden]=isHidden(dataSource.columnNames[__KEY_IDX__])>
+        <mat-form-field floatLabel="always">
+            <mat-label>{{dataSource.columnNames[__KEY_IDX__]}}</mat-label>
+            <input id='dataSource.item.entity.__KEY__' matInput
+                placeholder={{dataSource.item.entity.__KEY__}}
+                [(ngModel)]="dataSource.item.entity.__KEY__" [formControl]="validators[__KEY_IDX__].formControl"
+                (blur)="validators[__KEY_IDX__].showError()" required>
+            @if (validators[__KEY_IDX__].formControl.invalid) {
+            <mat-error>{{validators[__KEY_IDX__].message()}}</mat-error>
+            }
+        </mat-form-field>
+    </div>

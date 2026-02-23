@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+try () {
+    "$@" || exit 1
+}
+
+try . appgen
+
+SCHEMA_DIR="${0%/*}/schema"
+
+# ensure seed data can be found
+CSV_DIR="${0%/*}/csv"
+generate() {
+    # processes the csv files in ./csv
+    # - generates json schemas in ./schema
+    # - generates csv seed files in ./backend/database/csv_seed
+    # - generates scripts in ./backend/database/scripts
+    # - generates sql in ./backend/database/sql
+    try database-raw-csv-to-schema "${CSV_DIR}/${1}.csv" --quiet
+}
+generate Tasks
+
+# backend/api
+# - generate API endpoint(s)
+try api-endpoint-crud-schema "${SCHEMA_DIR}/tasks.json"
+
+# frontend
+# - generate page(s) using schema
+try app-page-table-crud-schema "${SCHEMA_DIR}/tasks.json"
+
+# amend menu item(s)
+try app-menu-add --menu=Tasks
+# app-menu-remove --menu=Home
+
+# create db table(s) and seed them (allow time for db to become available)
+try ./docker/app-start-backend
+echo "waiting for backend..."
+sleep 10s
+try ./docker/db-recreate-seed
+try ./docker/app-stop-backend
+
+echo
+echo "app configured"
+echo "./docker/app-start"
+echo "./app-start"
+echo "http://localhost:4200"
+echo "http://localhost:3000/api-docs"

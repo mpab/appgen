@@ -1,0 +1,9 @@
+{
+  "title": "__ENTITY_SNAKE__",
+  "type": "object",
+  "properties": {
+__SCHEMA_PROPERTIES__
+  },
+  "required": [__SCHEMA_FIELDS__],
+  "additionalProperties": false
+}

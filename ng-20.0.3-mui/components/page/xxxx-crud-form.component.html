@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{dataSource.crudMode}} __ENTITY_PASCAL_SPACED_NO_ENUM__</h2>
+<mat-dialog-content>
+
+__FORM_TEMPLATE_FRAGMENTS__
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div [hidden]="dataSource.hideDelete" style='margin-right:4px'>
+        <mat-checkbox
+            color='primary'
+            [ngModel]='getDeleteCheckbox()'
+            (ngModelChange)="toggleDeleteCheckbox($event)">
+        </mat-checkbox>
+    </div>
+    <button mat-raised-button mat-dialog-close="delete" [hidden]="dataSource.hideDelete" [disabled]="disableDelete">
+        Delete
+    </button>
+    <button mat-raised-button mat-dialog-close="cancel">Cancel</button>
+    <button mat-raised-button mat-dialog-close="action" [disabled]="disableAction">{{dataSource.crudAction}}</button>
+</mat-dialog-actions>

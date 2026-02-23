@@ -1,0 +1,17 @@
+    <div [hidden]=isHidden(dataSource.columnNames[__KEY_IDX__])>
+        <mat-form-field floatLabel="always">
+            <mat-label>{{dataSource.columnNames[__KEY_IDX__]}}</mat-label>
+            <mat-select [(ngModel)]="dataSource.item.entity.__KEY__"
+                placeholder={{dataSource.item.entity.__KEY__}}
+                [formControl]="validators[__KEY_IDX__].formControl" (blur)="validators[__KEY_IDX__].showError()" required>
+                @for (item of dataSource.item.constraints.__KEY__; track $index; let idx =
+                $index) {
+                <mat-option [id]="item.business_process_institution_enum_id"
+                    [value]="item.__KEY__">{{item.__KEY__}}</mat-option>
+                }
+            </mat-select>
+            @if (validators[__KEY_IDX__].formControl.invalid) {
+            <mat-error>{{validators[__KEY_IDX__].message()}}</mat-error>
+            }
+        </mat-form-field>
+    </div>

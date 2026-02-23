@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import tasks.backend_context as backend_context
+import tasks.db.db_get_entity_names_from_entity_arg as db_get_entity_names_from_entity_arg
+import tasks.api.api_parse_schema_file_entity as api_parse_schema_file_entity
+import tasks.db.db_sql_generate_ddl as db_sql_generate_ddl
+import tasks.db.db_sql_generate_dqml as db_sql_generate_dqml
+import tasks.api.api_generate_crud as api_generate_crud
+import project.tasks.project_show_completed_tasks as project_show_completed_tasks
+import project.tasks.project_check_user_actions as project_check_user_actions
+
+import project.tasks.project_summary_entity_names as project_summary_entity_names
+import project.tasks.project_summary_analysis as project_summary_analysis
+import project.tasks.project_summary_sql as project_summary_sql
+
+##############################################################################
+
+ctx = backend_context.create(__file__)
+ctx.exec(db_get_entity_names_from_entity_arg)
+ctx.exec(api_parse_schema_file_entity)
+ctx.exec(db_sql_generate_ddl)
+ctx.exec(db_sql_generate_dqml)
+ctx.exec(api_generate_crud)
+ctx.set_opt("--quiet", False)
+ctx.exec(project_show_completed_tasks)
+ctx.exec(project_check_user_actions)
+
+##############################################################################
+
+# ctx.exec(project_summary_entity_names)
+# ctx.exec(project_summary_analysis)
+# ctx.exec(project_summary_sql)

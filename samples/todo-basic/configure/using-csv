@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+try () {
+    "$@" || exit 1
+}
+
+try . appgen
+
+CSV_DIR="${0%/*}/csv"
+APIURL="http://localhost:3000/api"
+
+# backend/api
+# - copy csv seed file(s)
+# - infer schema
+# - generate API endpoint(s)
+# - generate SQL
+try api-endpoint-crud "${CSV_DIR}/Tasks.csv"
+
+# create db table(s) and seed them (allow time for db to become available)
+try ./docker/app-start-backend
+echo "waiting for backend..."
+sleep 10s
+try ./docker/db-recreate-seed
+
+# generate page(s) using API
+try app-page-table-crud "${APIURL}/Tasks"
+try ./docker/app-stop-backend
+
+# amend menu item(s)
+try app-menu-add --menu=Tasks
+# app-menu-remove --menu=Home
+
+echo
+echo "app configured"
+echo "./docker/app-start"
+echo "./app-start"
+echo "http://localhost:4200"
+echo "http://localhost:3000/api-docs"

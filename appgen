@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
+
+. appgen-activate
+
+try () {
+    "$@" || return 1
+}
+
+FATAL_FILE="./appgen-fatal.txt"
+[ -f $FATAL_FILE ] && cat $FATAL_FILE && return 1
+
+PROJECT_SRC=$(dirname "${BASH_SOURCE-$0}") >/dev/null 2>&1
+[ -z "${PROJECT_SRC}" ] && PROJECT_SRC="$(dirname ${(%):-%x})"
+
+cp -R "${PROJECT_SRC}"/project/docker .
+echo "NAME=${PWD##*/}" > ./docker/.env
+chmod +x ./docker/*
+
+cp "${PROJECT_SRC}"/project/app* .
+echo "echo ${PWD##*/}" > app-name
+chmod +x ./app*
+
+OPT_QUIET="--quiet"
+
+if [ ! -d backend/database ]; then
+    try database-init "$OPT_QUIET"
+    # (
+    # mkdir -p backend/database
+    # cd backend/database || exit
+    # database-init "$OPT_QUIET"
+    # )
+else
+    echo "backend/database exists - skipping"
+fi
+
+if [ ! -f backend/api/package.json ]; then
+    (
+    mkdir -p backend/api
+    cd backend/api || exit
+    try api-new "$OPT_QUIET"
+    )
+    try api-init "$OPT_QUIET"
+else
+    echo "backend/api/package.json exists - skipping"
+fi
+
+if [ ! -f frontend/package.json ]; then
+    (
+    mkdir -p frontend
+    cd frontend || exit
+    try app-new "$OPT_QUIET"
+    )
+    try app-init "$OPT_QUIET"
+else
+    echo "frontend/package.json exists - skipping"
+fi
+
+echo "echo ${PWD##*/}-database-1" > ./backend/database/scripts/database-name
+chmod +x ./backend/database/scripts/database-name
+
+cp "${PROJECT_SRC}"/USER_GUIDE.md ./README.md
+{ echo "\
+
+## Generated via the following templates
+
+- frontend: $__APPGEN_PROFILE_FE__
+- backend:  $__APPGEN_PROFILE_BE__"
+} >> ./README.md

@@ -1,0 +1,31 @@
+<div>
+
+    <div>
+        <mat-form-field class="x-mat-form-field">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button (click)="onClickAdd()">Create</button>
+    </div>
+
+    <div class="crud-table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="sticky-table x-mat-table">
+
+__XXXX_TEMPLATE_FRAGMENTS__
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let item; columns: displayedColumns;" (click)="onClickEdit(item)"></tr>
+
+        </table>
+    </div>
+</div>
+<mat-paginator #paginator
+               (page)="handlePaginatorEvent($event)"
+               [pageSize]="paginatorPageSize"
+               [disabled]="paginatorDisabled"
+               [showFirstLastButtons]="paginatorShowFirstLastButtons"
+               [pageSizeOptions]="paginatorShowPageSizeOptions ? paginatorPageSizeOptions : []"
+               [hidePageSize]="paginatorHidePageSize"
+               aria-label="Select page">
+</mat-paginator>
+<app-alert></app-alert>

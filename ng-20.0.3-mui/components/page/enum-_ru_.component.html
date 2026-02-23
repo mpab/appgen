@@ -1,0 +1,51 @@
+<div>
+
+    <div>
+        <mat-form-field class="x-mat-form-field">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="crud-table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="x-mat-table">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let item">
+                    {{item.__ENTITY_ID__}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="__KEY__">
+                <th mat-header-cell *matHeaderCellDef>__KEY_PASCAL_SPACED_NO_ENUM__</th>
+                <td mat-cell class="x-mat-mdc-text-field" *matCellDef="let item">
+                    <div >
+                        <mat-form-field class="mat-form-field-edit" floatLabel="always" subscriptSizing="dynamic">
+                            <input matInput
+                                id={item.__ENTITY_ID__}}
+                                [ngModel]='getNgModel(item).__KEY__'
+                                (ngModelChange)="onNgModelChange($event, item)"
+                                required>
+                        </mat-form-field>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell class="x-mat-mdc-button" *matCellDef="let item">
+                    <button mat-button
+                    [disabled]="disableSave(item)"
+                    (click)="onClickSave(item)">Save</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+            <tr mat-row *matRowDef="let item; columns: displayedColumns;"></tr>
+
+        </table>
+    </div>
+</div>
+<app-alert></app-alert>
