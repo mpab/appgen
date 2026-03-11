@@ -11,9 +11,12 @@ First ensure that the appgen toolchain is on the path
 ```sh
 # .bashrc
 # appgen is installed at ~/appgen
-. ~/appgen/appgen-configure
+# (must be sourced)
+. ~/configure-$TEMPLATE
 
-# or setup manually
+
+# or use as required
+. $APPGEN_PATH/configure-$TEMPLATE
 ```
 
 Generate an app skeleton using a template
