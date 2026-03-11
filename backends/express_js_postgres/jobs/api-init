@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+import set_paths
+import express_js_postgres.backend_context as context
+import express_js_postgres.tasks.api_copy_files as api_copy_files
+
+##############################################################################
+
+ctx = context.create_for_init(__file__)
+ctx.exec(api_copy_files)
+
+##############################################################################

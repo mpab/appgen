@@ -1,7 +1,7 @@
 Claim of Authorship
 I, Michael Alderson-Bythell, assert my right to be recognized as the Author of this body of work.
 Specifically the shfl library portions of the repository. (c) 2026 onwards.
-All code was written by me, no AI was used in the creation of this project.
+All code was written by me, no AI was used in the creation of this common.
 
 Terms of Use
 You may use this for non-commercial purposes, with attribution.

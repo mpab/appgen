@@ -1,0 +1,8 @@
+[tasks.frontend-start]
+run = "cd frontend && mise trust mise.toml && mise start"
+
+[tasks.api-start]
+run = "cd backend/api && mise trust mise.toml && mise start"
+
+[tasks.db-start]
+run = "./docker/db-start"

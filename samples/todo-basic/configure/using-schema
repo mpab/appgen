@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
 
 try () {
+    [ -f fatal.txt ] && cat fatal.txt && exit 1
     "$@" || exit 1
 }
 
 try . appgen
-
-SCHEMA_DIR="${0%/*}/schema"
+SCHEMA_DIR="${0%/*}/schema_json"
 
 # ensure seed data can be found
-CSV_DIR="${0%/*}/csv"
-generate() {
-    # processes the csv files in ./csv
-    # - generates json schemas in ./schema
-    # - generates csv seed files in ./backend/database/csv_seed
-    # - generates scripts in ./backend/database/scripts
-    # - generates sql in ./backend/database/sql
-    try database-raw-csv-to-schema "${CSV_DIR}/${1}.csv" --quiet
-}
-generate Tasks
+"./${0%/*}/generate-schema"
 
 # backend/api
 # - generate API endpoint(s)
@@ -33,11 +24,11 @@ try app-menu-add --menu=Tasks
 # app-menu-remove --menu=Home
 
 # create db table(s) and seed them (allow time for db to become available)
-try ./docker/app-start-backend
-echo "waiting for backend..."
+try ./docker/db-start
+echo "waiting for database..."
 sleep 10s
-try ./docker/db-recreate-seed
-try ./docker/app-stop-backend
+try ./docker/db-seed
+try ./docker/db-stop
 
 echo
 echo "app configured"

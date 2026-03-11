@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
+
+export __APPGEN_HOME__="${1}"
+
+export __APPGEN_FE_PATH__="${__APPGEN_HOME__}/frontends/${__APPGEN_PROFILE_FE__}"
+export __APPGEN_BE_PATH__="${__APPGEN_HOME__}/backends/${__APPGEN_PROFILE_BE__}"
+
+export __APPGEN_COMMON_PATH__="${__APPGEN_HOME__}/common"
+export __APPGEN_DB_PATH__="${__APPGEN_HOME__}/postgres"
+
+[ ! -d "${__APPGEN_FE_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_FE_PATH__}" && return
+[ ! -d "${__APPGEN_BE_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_BE_PATH__}" && return
+[ ! -d "${__APPGEN_COMMON_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_COMMON_PATH__}" && return
+[ ! -d "${__APPGEN_DB_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_DB_PATH__}" && return
+
+export PATH="${__APPGEN_COMMON_PATH__}/jobs:${__APPGEN_BE_PATH__}/jobs:${__APPGEN_FE_PATH__}/jobs:${__APPGEN_DB_PATH__}/jobs:${PATH}"

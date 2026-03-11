@@ -6,6 +6,7 @@
 # creates/uses an appgen python environment
 # generates a basic application skeleton in the current directory
 # (must be sourced)
+. $APPGEN_PATH/configure-$TEMPLATE
 . appgen
 ```
 
@@ -30,9 +31,9 @@ api-endpoint-crud Tasks.csv
 To generate a frontend page component, the API must be running
 
 ```sh
-./docker/app-start-backend
+./docker/backend-start
 # populate the data so that the API can supply it
-./docker/db-recreate-seed
+./docker/db-seed
 
 # (optional) check the API
 curl http://localhost:3000/api/Tasks
@@ -61,9 +62,9 @@ http://localhost:3000/api-docs
 ./docker/db-psql
 ```
 
-## Error Handling - appgen-fatal.txt
+## Error Handling - fatal.txt
 
-If an error is detected during app generation, a file 'appgen-fatal.txt' is written to the current directory.  
+If an error is detected during app generation, a file 'fatal.txt' is written to the current directory.  
 If this happens, inspect the file and correct the issue, then delete the error file before running the app generation again.
 
 **Code generation will be blocked if this file is present.**

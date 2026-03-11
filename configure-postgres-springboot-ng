@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
+
+export __APPGEN_PROFILE_FE__="ng_20_0_3_mui"
+export __APPGEN_PROFILE_BE__="spring_boot_postgres"
+
+APPGEN_HOME=$(dirname "${BASH_SOURCE-$0}") >/dev/null 2>&1
+[ -z "${APPGEN_HOME}" ] && APPGEN_HOME=$(dirname ${(%):-%x})
+
+. "${APPGEN_HOME}/.configure-common" "${APPGEN_HOME}"

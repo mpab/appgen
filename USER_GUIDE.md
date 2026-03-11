@@ -3,8 +3,8 @@
 Quick Start
 
 ```sh
-./docker/db-recreate-seed
-./docker-app-start
+./docker/db-seed
+./docker/app-start
 ```
 
 UI <http://localhost:4200>  
@@ -52,19 +52,19 @@ calls docker compose using the default yaml file
 ./docker/app-start
 
 # starts the api and db
-./docker/app-start-backend
+./docker/backend-start
 
 # starts the ui
-./docker/app-start-frontend
+./docker/frontend-start
 
 # stops the app
 ./docker/app-stop
 
 # stops the api and db
-./docker/app-stop-backend
+./docker/backend-stop
 
 # stops the ui
-./docker/app-stop-frontend
+./docker/frontend-stop
 
 # used by ./docker/-compose
 compose-vol-service.yaml
@@ -74,11 +74,11 @@ compose-vol-shared.yaml
 # e.g. ./docker/db sh
 ./docker/db
 
-# opens the psql tertminal in the db docker
+# opens the psql terminal in the db docker
 ./docker/db-psql
 
 # (re) creates the db tables and seeds the tables with CSV data
-./docker/db-recreate-seed
+./docker/db-seed
 
 # starts the db container
 ./docker/db-start

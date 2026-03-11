@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+{ echo "\
+# App: $(./app-name)
+
+## Usage
+
+\`\`\`sh
+# start and stop the app
+./docker/app-start
+./docker/app-stop
+
+# psql terminal
+./docker/db-psql
+
+# recreate the DB tables and reseed the DB
+./docker/db-seed
+
+# regenerate the app using the CSV data
+./configure/using-csv
+
+# regenerate the app using the JSON schema
+./configure/using-schema
+\`\`\`
+
+## Generated via the following templates
+
+- frontend: $__APPGEN_PROFILE_FE__
+- backend:  $__APPGEN_PROFILE_BE__"
+} > README.md

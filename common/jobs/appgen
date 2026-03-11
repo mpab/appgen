@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
+
+. appgen-activate
+
+try () {
+    "$@" || return 1
+}
+
+FATAL_FILE="./fatal.txt"
+[ -f $FATAL_FILE ] && cat $FATAL_FILE && return 1
+
+PROJECT_SRC=$(dirname "${BASH_SOURCE-$0}") >/dev/null 2>&1
+[ -z "${PROJECT_SRC}" ] && PROJECT_SRC="$(dirname ${(%):-%x})"
+
+export APPGEN_PROJECT_NAME=${PWD##*/}
+
+cp -R "${PROJECT_SRC}"/../docker .
+echo "NAME=${APPGEN_PROJECT_NAME}" > ./docker/.env
+chmod +x ./docker/*
+
+cp "${PROJECT_SRC}"/../scripts/* .
+echo "echo ${APPGEN_PROJECT_NAME}" > app-name
+chmod +x ./app*
+[ -f mise.toml ] && mise trust mise.toml
+
+OPT_QUIET="--quiet"
+
+try database-init "$OPT_QUIET"
+echo "echo ${APPGEN_PROJECT_NAME}-database-1" > ./backend/database/scripts/database-name
+chmod +x ./backend/database/scripts/database-name
+
+if [ ! -f ./backend/api/mise.toml ]; then
+    (
+    mkdir -p ./backend/api
+    cd backend/api || exit
+    try api-new "$OPT_QUIET"
+    )
+fi
+try api-init "$OPT_QUIET"
+
+if [ ! -f ./frontend/mise.toml ]; then
+    (
+    mkdir -p frontend
+    cd frontend || exit
+    try app-new "$OPT_QUIET"
+    )
+fi
+try app-init "$OPT_QUIET"

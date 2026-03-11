@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import set_paths
+import express_js_postgres.backend_context as context
+import common.tasks.parse_schema as parse_schema
+import common.tasks.check_fields_option_schema_and_parse as check_fields_option_schema_and_parse
+import postgres.tasks.generate_ddl_sql as generate_ddl_sql
+import postgres.tasks.generate_dqml_sql as generate_dqml_sql
+import express_js_postgres.tasks.api_generate_be4fe as generate_be4fe
+import common.tasks.project_show_completed_tasks as project_show_completed_tasks
+
+import common.tasks.project_check_user_actions as project_check_user_actions
+import common.tasks.project_summary_entity_names as project_summary_entity_names
+import common.tasks.project_summary_analysis as project_summary_analysis
+import common.tasks.project_summary_sql as project_summary_sql
+
+##############################################################################
+
+ctx = context.create(__file__)
+ctx.set_entity_names_path_snake()
+ctx.exec(parse_schema)
+ctx.exec(check_fields_option_schema_and_parse)
+ctx.exec(generate_ddl_sql)
+ctx.exec(generate_dqml_sql)
+ctx.exec(generate_be4fe)
+ctx.set_opt("--quiet", False)
+ctx.exec(project_show_completed_tasks)
+
+##############################################################################
+
+# ctx.exec(project_check_user_actions)
+# ctx.exec(project_summary_entity_names)
+# ctx.exec(project_summary_analysis)
+# ctx.exec(project_summary_sql)

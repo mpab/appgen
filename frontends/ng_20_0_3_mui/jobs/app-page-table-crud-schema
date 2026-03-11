@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+
+import set_paths
+import ng_20_0_3_mui.frontend_context as context
+import ng_20_0_3_mui.tasks.schema_parse_as_entity_collection as schema_parse_as_entity_collection
+import ng_20_0_3_mui.tasks.html_generate_xxxx_crud as html_generate_xxxx_crud
+import ng_20_0_3_mui.tasks.ts_generate_table_crud as ts_generate_table_crud
+import ng_20_0_3_mui.tasks.css_copy_xxxx_crud as css_copy_xxxx_crud
+import ng_20_0_3_mui.tasks.html_generate_table_crud_form as html_generate_table_crud_form
+import ng_20_0_3_mui.tasks.ts_generate_xxxx_crud_form as ts_generate_xxxx_crud_form
+import ng_20_0_3_mui.tasks.css_copy_xxxx_crud_form as css_copy_xxxx_crud_form
+import ng_20_0_3_mui.tasks.ts_generate_model_crud as ts_generate_model_crud
+import ng_20_0_3_mui.tasks.ts_generate_service_crud as ts_generate_service_crud
+import ng_20_0_3_mui.tasks.ts_generate_routes as ts_generate_routes
+import ng_20_0_3_mui.tasks.ts_merge_app_routes as ts_merge_app_routes
+import ng_20_0_3_mui.tasks.add_menu_entry as add_menu_entry
+import common.tasks.project_show_completed_tasks as project_show_completed_tasks
+
+import common.tasks.project_check_user_actions as project_check_user_actions
+import common.tasks.project_summary_entity_names as project_summary_entity_names
+import common.tasks.project_summary_analysis as project_summary_analysis
+import common.tasks.project_summary_sql as project_summary_sql
+
+##############################################################################
+
+ctx = context.create(__file__)
+ctx.set_entity_names_path_snake()
+ctx.exec(schema_parse_as_entity_collection)
+ctx.exec(html_generate_xxxx_crud)
+ctx.exec(ts_generate_table_crud)
+ctx.exec(css_copy_xxxx_crud)
+ctx.exec(html_generate_table_crud_form)
+ctx.exec(ts_generate_xxxx_crud_form)
+ctx.exec(css_copy_xxxx_crud_form)
+ctx.exec(ts_generate_model_crud)
+ctx.exec(ts_generate_service_crud)
+ctx.exec(ts_generate_routes)
+ctx.exec(ts_merge_app_routes)
+ctx.exec(add_menu_entry)
+ctx.set_opt("--quiet", False)
+ctx.exec(project_show_completed_tasks)
+
+##############################################################################
+
+# ctx.exec(project_check_user_actions)
+# ctx.exec(project_summary_entity_names)
+# ctx.exec(project_summary_analysis)
+# ctx.exec(project_summary_sql)

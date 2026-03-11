@@ -1,0 +1,20 @@
+<form #form__ENTITY_PASCAL__="ngForm">
+    <nz-table #basicTable [nzData]="__ENTITY_CAMEL__Collection" [nzFrontPagination]=false [nzScroll]="nzScroll">
+        <thead>
+            <tr>
+                __TBL_KEYS__
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of __ENTITY_CAMEL__Collection; track item.__ENTITY_ID__; let idx = $index) {
+            <tr>
+                __TBL_VALS__
+            <tr>
+                }
+            <tr>
+                __CREATE__
+            </tr>
+        </tbody>
+    </nz-table>
+</form>
+<app-alert></app-alert>
