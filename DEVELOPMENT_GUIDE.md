@@ -2,12 +2,19 @@
 
 ## Application and component generation
 
+__APPGEN_HOME__ must be defined and on the path
+
 ```sh
-# creates/uses an appgen python environment
-# generates a basic application skeleton in the current directory
+# example .bashrc appgen configuration
+export __APPGEN_HOME__="$HOME/appgen"
+export PATH="$PATH:${__APPGEN_HOME__}"
+```
+
+```sh
+# to create an appgen python environment
 # (must be sourced)
-. $APPGEN_PATH/configure-$TEMPLATE
-. appgen
+
+. appgen # generates a basic application skeleton in the current directory
 ```
 
 Sample CSV: Tasks.csv

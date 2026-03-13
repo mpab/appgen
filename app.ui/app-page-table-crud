@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import env
+
+import ui.url_parse_entity_names as url_parse_entity_names
+import ui.ensure_entity_is_not_enum as ensure_entity_is_not_enum
+import ui.url_parse_result_as_entity_collection as url_parse_result_as_entity_collection
+
+import ui.html_generate_xxxx_crud as html_generate_xxxx_crud
+import ui.ts_generate_table_crud as ts_generate_table_crud
+import ui.css_copy_xxxx_crud as css_copy_xxxx_crud
+
+import ui.html_generate_table_crud_form as html_generate_table_crud_form
+import ui.ts_generate_xxxx_crud_form as ts_generate_xxxx_crud_form
+import ui.css_copy_xxxx_crud_form as css_copy_xxxx_crud_form
+
+import ui.ts_generate_model_crud as ts_generate_model_crud
+import ui.ts_generate_service_crud as ts_generate_service_crud
+
+import ui.ts_generate_routes as ts_generate_routes
+import ui.ts_merge_app_routes as ts_merge_app_routes
+import ui.add_menu_entry as add_menu_entry
+
+import app.project_show_completed_tasks as project_show_completed_tasks
+import app.project_check_user_actions as project_check_user_actions
+
+import app.project_summary_entity_names as project_summary_entity_names
+import app.project_summary_analysis as project_summary_analysis
+import app.project_summary_sql as project_summary_sql
+
+##############################################################################
+
+ctx = env.create(__file__)
+ctx.exec(url_parse_entity_names)
+ctx.exec(ensure_entity_is_not_enum)
+ctx.exec(url_parse_result_as_entity_collection)
+
+ctx.exec(html_generate_xxxx_crud)
+ctx.exec(ts_generate_table_crud)
+ctx.exec(css_copy_xxxx_crud)
+
+ctx.exec(html_generate_table_crud_form)
+ctx.exec(ts_generate_xxxx_crud_form)
+ctx.exec(css_copy_xxxx_crud_form)
+
+ctx.exec(ts_generate_model_crud)
+ctx.exec(ts_generate_service_crud)
+
+ctx.exec(ts_generate_routes)
+ctx.exec(ts_merge_app_routes)
+ctx.exec(add_menu_entry)
+
+ctx.set_opt("--quiet", False)
+ctx.exec(project_show_completed_tasks)
+ctx.exec(project_check_user_actions)
+
+##############################################################################
+
+# ctx.exec(project_summary_entity_names)
+# ctx.exec(project_summary_analysis)
+# ctx.exec(project_summary_sql)

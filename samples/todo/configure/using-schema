@@ -7,7 +7,6 @@ try () {
 
 try . appgen
 SCHEMA_DIR="${0%/*}/schema_json"
-
 # ensure seed data can be found
 "./${0%/*}/generate-schema"
 

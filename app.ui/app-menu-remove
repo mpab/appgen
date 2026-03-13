@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import env
+
+import ui.remove_menu_entry as remove_menu_entry
+
+##############################################################################
+
+ctx = env.create(__file__)
+if not (ctx.read_opts()):
+    ctx.fatal("arguments required")
+
+ctx.exec(remove_menu_entry)
+if ctx.NO_MENU:
+    ctx.fatal("no menu entry specified")
+
+##############################################################################

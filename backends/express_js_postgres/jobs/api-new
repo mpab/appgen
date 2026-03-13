@@ -3,9 +3,10 @@
 FATAL_FILE="./fatal.txt"
 [ -f $FATAL_FILE ] && cat $FATAL_FILE && exit 1
 
-JOBS_DIR=$(dirname "${BASH_SOURCE-$0}") >/dev/null 2>&1
-API_APP_COMPONENTS_DIR="$JOBS_DIR/../components/app"
-cp "$API_APP_COMPONENTS_DIR"/* .
+mkdir -p ./backend/api
+cd ./backend/api || exit
+
+[ -d node_modules ] && echo "$0: found node_modules, skipping" && exit
 
 mise trust ./mise.toml
 mise install
@@ -23,8 +24,3 @@ mise r npm install --verbose pg
 mise r npm install --verbose cors
 
 mise r npm install --verbose -D nodemon
-
-echo PORT=3000 > ./.env
-
-mkdir src
-echo "console.log('Hello');" > ./src/index.js

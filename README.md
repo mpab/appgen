@@ -4,19 +4,21 @@ Generates n-tier applications from an (implicit) CSV schema or an (explicit) JSO
 The application components (frontend, api) can be run inside docker containers or stand-alone.  
 The application database itself is containerized.
 
-## Usage
+## Application and component generation
 
-First ensure that the appgen toolchain is on the path
+__APPGEN_HOME__ must be defined and on the path
 
 ```sh
-# .bashrc
-# appgen is installed at ~/appgen
+# example .bashrc appgen configuration
+export __APPGEN_HOME__="$HOME/appgen"
+export PATH="$PATH:${__APPGEN_HOME__}"
+```
+
+```sh
+# to create an appgen python environment
 # (must be sourced)
-. ~/configure-$TEMPLATE
 
-
-# or use as required
-. $APPGEN_PATH/configure-$TEMPLATE
+. appgen # generates a basic application skeleton in the current directory
 ```
 
 Generate an app skeleton using a template
@@ -31,7 +33,7 @@ Generate an app using a sample configuration inferring the data schema from the 
 
 ```sh
 mkdir todo
-cp -R ~/appgen/samples/todo-basic/configure .
+cp -R $__APPGEN_HOME__/samples/todo-basic/configure .
 ./configure/using-csv
 ```
 
@@ -39,7 +41,7 @@ Generate an app using a sample configuration using a data schema
 
 ```sh
 mkdir todo
-cp -R ~/appgen/samples/todo-basic/configure .
+cp -R $__APPGEN_HOME__/samples/todo-basic/configure .
 ./configure/using-schema
 ```
 

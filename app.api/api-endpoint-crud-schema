@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import env
+
+import app.parse_schema as parse_schema
+
+import db.generate_dqml_sql as generate_dqml_sql
+import api.generate_crud as generate_crud
+import app.project_show_completed_tasks as project_show_completed_tasks
+import app.project_check_user_actions as project_check_user_actions
+
+import app.project_summary_entity_names as project_summary_entity_names
+import app.project_summary_analysis as project_summary_analysis
+import app.project_summary_sql as project_summary_sql
+
+##############################################################################
+
+ctx = env.create(__file__)
+ctx.set_entity_names_path_snake()
+ctx.exec(parse_schema)
+ctx.exec(generate_dqml_sql)
+ctx.exec(generate_crud)
+ctx.set_opt("--quiet", False)
+ctx.exec(project_show_completed_tasks)
+ctx.exec(project_check_user_actions)
+
+##############################################################################
+
+# ctx.exec(project_summary_entity_names)
+# ctx.exec(project_summary_analysis)
+# ctx.exec(project_summary_sql)

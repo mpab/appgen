@@ -26,5 +26,5 @@
 ## Generated via the following templates
 
 - frontend: $__APPGEN_PROFILE_FE__
-- backend:  $__APPGEN_PROFILE_BE__"
+- backend:  $__APPGEN_PROFILE_API__"
 } > README.md

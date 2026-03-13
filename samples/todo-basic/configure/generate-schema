@@ -6,6 +6,7 @@ try () {
 }
 
 . appgen-activate
+database-init # ensure baseline scripts
 SCHEMA_DIR="${0%/*}/schema_json"
 
 # ensure seed data can be found

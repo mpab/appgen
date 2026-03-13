@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
+
+[ -z "${__APPGEN_HOME__}" ] && echo "INVALID (NULL) __APPGEN_HOME__" && return
+[ ! -d "${__APPGEN_HOME__}" ] && echo "INVALID __APPGEN_HOME__: ${__APPGEN_HOME__}" && return
+
+export __APPGEN_PROFILE_FE__="ng_20_0_3_mui"
+export __APPGEN_PROFILE_API__="express_js_postgres"
+export __APPGEN_PROFILE_DB__="postgres"
+
+[ ! -f "${__APPGEN_HOME__}/.configure-common" ] && echo "$0: ${__APPGEN_HOME__}/.configure-common not found" && return 
+. "${__APPGEN_HOME__}/.configure-common" "${__APPGEN_HOME__}"

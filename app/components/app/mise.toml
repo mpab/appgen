@@ -1,0 +1,21 @@
+[tasks.frontend-start]
+run = "cd frontend && mise trust mise.toml && mise start"
+
+[tasks.api-start]
+run = "cd backend/api && mise trust mise.toml && mise start"
+
+[tasks.db-start]
+run = "./docker/db-start"
+
+[tasks.app-start]
+run = "./tmux/app-start"
+
+[tasks.app-stop]
+run = "./tmux/app-stop"
+
+[tasks.app-node-purge]
+run = '''
+find ./backend -name package-lock.json -exec rm -rf {} \; || true
+find ./frontend -name node_modules -exec rm -rf {} \; || true
+'''
+silent = true
