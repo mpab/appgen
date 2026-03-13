@@ -1,6 +1,6 @@
 # Application Generator
 
-Generates n-tier applications from an (implicit) CSV schema or an (explicit) JSON common.  
+Generates n-tier applications from an (implicit) CSV schema or an (explicit) JSON schema.  
 The application components (frontend, api) can be run inside docker containers or stand-alone.  
 The application database itself is containerized.
 
@@ -71,11 +71,23 @@ Status
 
 General app structure
 
-```
-├── backend/
-├── configure/
-├── docker/
-└── frontend/
+```text
+├── backend
+│   ├── api             # Business logic and API
+│   └── database        # Database layer
+│       ├── csv_seed    # CSV seed data in schema form
+│       ├── scripts     # db scripts
+│       └── sql         # SQL statements used by the db scripts
+├── configure
+│   ├── csv_raw         # CSV source data
+│   ├── generate-schema # use to generate the schema from CSV source data
+│   ├── schema_csv      # CSV seed data in schema form
+│   ├── schema_json     # JSON data schema
+│   ├── using-csv       # use to generate the application, schema, and seed data
+│   └── using-schema    # use to generate the application, and seed data
+├── docker              # docker scripts and helpers
+├── frontend            # Presentation layer
+└── pgdata              # Database mount point, contains the DB data
 ```
 
 Some of these paths can be overridden.
@@ -96,6 +108,6 @@ If this happens, inspect the file and correct the issue, then delete the error f
 - docker (for the database)
 - mise-en-place (mise)
 - python (for app component generation from a code template)
-- tmux (if running ./app-start)
+- tmux (if running ./tmux/* scripts)
 
 **Code generation dependencies are installed via mise.**
