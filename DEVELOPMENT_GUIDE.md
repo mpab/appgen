@@ -104,11 +104,53 @@ Due By
 Status
 ```
 
----
-
 ## Template Application Samples
 
 [samples for application generation](./samples/README.md)
+
+### Template Application Samples: CSV transformation pipelines
+
+#### Configuration scripts and data
+
+```sh
+├── configure/
+    ├── csv_raw/
+    ├── generate-schema
+    ├── schema_csv/
+    ├── schema_json/
+    ├── using-csv
+    └── using-schema
+```
+
+#### To generate a single schema json and seed csv from raw csv
+
+```sh
+. appgen-venv
+raw-csv-to-schema ./config/csv_raw/PascalCase.csv
+
+[in]  ./config/csv_raw/PascalCase.csv
+[out] ./config/schema_csv/snake_case.csv
+[out] ./config/schema_json/snake_case.json
+[out] ./backend/database/csv_seed/snake_case.csv
+```
+
+#### To generate all application schema json and seed csv from raw csv
+
+```sh
+./configure/generate-schema
+```
+
+#### To generate the app stack
+
+```sh
+# generate application components
+# using the raw csv and API endpoints
+./configure/using-csv
+
+# generate schema json and seed csv from raw csv
+# then generate application components using the schema json
+./configure/using-schema
+```
 
 ---
 

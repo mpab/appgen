@@ -11,6 +11,6 @@ mkdir -p ./backend/database/scripts
 echo "echo ${DB_NAME}" > ./backend/database/scripts/database-name
 chmod +x ./backend/database/scripts/database-name
 
-echo "**/pgdata" > .gitignore
+echo "**/db_data" > .gitignore
 
 echo "configured database folders"

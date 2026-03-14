@@ -4,7 +4,7 @@ services:
     profiles: [all, backend, database]
     volumes:
       - database_scripts:../database
-      - pgdata:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     image: postgres:17
     restart: always
     shm_size: 128mb
@@ -56,9 +56,9 @@ volumes:
       type: none
       device: ../backend/database
       o: bind
-  pgdata:
+  db_data:
     driver: local
     driver_opts:
       type: none
-      device: ../pgdata
+      device: ../db_data
       o: bind

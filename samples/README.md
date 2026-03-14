@@ -12,6 +12,8 @@ API <http://localhost:3000/api-docs>
 
 ## Application Structure
 
+### Folders
+
 ```text
 ├── backend
 │   ├── api             # Business logic and API
@@ -28,29 +30,23 @@ API <http://localhost:3000/api-docs>
 │   └── using-schema    # use to generate the application, and seed data
 ├── docker              # docker scripts and helpers
 ├── frontend            # Presentation layer
-├── pgdata              # Database mount point, contains the DB data
+├── db_data             # Database mount point, contains the DB data
 └── tmux                # native scripts running inside tmux
 ```
 
+### Logical App Stack
+
+```mermaid
+    block
+    columns 3
+    Frontend:3
+    blockArrow1<[" "]>(updown):3
+    API:3
+    blockArrow2<[" "]>(updown):3
+    Database[("Database")]:3
+```
+
 ## Scripts
-
-### Configuration tools
-
-```sh
-# CSV transformation pipelines
-# generate json schema
-config/generate-schema
-```
-
-```sh
-. appgen-venv
-raw-csv-to-schema ./config/csv_raw/PascalCase.csv
-
-./config/csv_raw/PascalCase.csv
--> ./config/schema_csv/snake_case.csv
--> ./config/schema_json/snake_case.json
--> ./backend/database/csv_seed/snake_case.csv
-```
 
 ### Docker
 
@@ -132,17 +128,18 @@ mise app-start
 mise app-stop
 ```
 
-## UI Pages
+
+## Application runtime
+
+### UI Pages
 
 <http://localhost:4200>
 
-## API Endpoints (Swagger/OpenAPI docs)
+### API Endpoints (Swagger/OpenAPI docs)
 
 <http://localhost:3000/api-docs>
 
----
-
-## Database
+### Database
 
 ```sh
 ./docker/db-psql
@@ -155,12 +152,16 @@ mise app-stop
 \ds
 ```
 
-### Database Admin (adminer)'
+### Database Admin (adminer)
 
 <http://localhost:8080>
 
-- System PostgresSQL
-- Server database
-- Username postgres
-- Password password
-- Database postgres
+Default login
+
+```
+System      PostgresSQL
+Server      database
+Username    postgres
+Password    password
+Database    postgres
+```

@@ -30,7 +30,7 @@ class PostgresContext:
         # ctx.ensure_folder(ctx.APP_DATABASE_SQL_PATH)
 
         # docker barfs on MacOS if not present?
-        # ctx.POSTGRES_VOLUME = f"./pgdata"
+        # ctx.POSTGRES_VOLUME = f"./db_data"
         # ctx.ensure_folder(ctx.POSTGRES_VOLUME)
 
 

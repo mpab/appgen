@@ -3,7 +3,7 @@ services:
   database:
     profiles: [all, backend, database]
     volumes:
-      - source: ../pgdata
+      - source: ../db_data
         target: /var/lib/postgresql/data
         type: bind
         bind:
