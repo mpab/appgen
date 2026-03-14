@@ -37,6 +37,10 @@
   - add README in sample explaining steps
   - add sample configuration script
   - add appgen-sample script to copy files
+- implement separate stacks with domain-specific tasks, but using common jobs
+- simplified sourcing requirements for scripts - now only required when selecting an environment
+- Replaced XX-init shell scripts with python
+- Added springboot + postgres backend
 
 ## In Progress
 
@@ -49,7 +53,6 @@
 - Integrate mise into runtime images
 - Replace parsing with argparse and add --help
   - https://grp-bio-it-workshops.embl-community.io/intermediate-python/04-argparse/index.html
-- Replace -new shell scripts with python
 - Integrate field reference into schema?
 
 ---

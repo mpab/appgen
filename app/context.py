@@ -86,6 +86,8 @@ class Context:
             return
         cls.JOB = job
 
+        cls.APP_APP_PATH = "./"
+
         cls.APP_BACKEND_PATH = cls.match_opt_prefix_or_default(
             "--backend-path=", "./backend"
         )
@@ -100,7 +102,7 @@ class Context:
         cls.ensure_folder(cls.APP_FRONTEND_PATH)
 
         # template paths - relative to appgen, set from environment
-        cls.COMPONENTS_CMD_PATH = f'{os.environ["__APPGEN_CMD_PATH__"]}/components'
+        cls.COMPONENTS_APP_PATH = f'{os.environ["__APPGEN_CMD_PATH__"]}/components'
         cls.COMPONENTS_DB_PATH = f'{os.environ["__APPGEN_DB_PATH__"]}/components'
         cls.COMPONENTS_UI_PATH = f'{os.environ["__APPGEN_FE_PATH__"]}/components'
         cls.COMPONENTS_API_PATH = f'{os.environ["__APPGEN_API_PATH__"]}/components'

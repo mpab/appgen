@@ -6,19 +6,18 @@ The application database itself is containerized.
 
 ## Application and component generation
 
-__APPGEN_HOME__ must be defined and on the path
+__APPGEN_HOME__ must be defined and ${__APPGEN_HOME__}/scripts on the path
 
 ```sh
 # example .bashrc appgen configuration
 export __APPGEN_HOME__="$HOME/appgen"
-export PATH="$PATH:${__APPGEN_HOME__}"
+export PATH="$PATH:${__APPGEN_HOME__}/scripts"
 ```
 
 ```sh
 # to create an appgen python environment
-# (must be sourced)
 
-. appgen # generates a basic application skeleton in the current directory
+appgen # generates a basic application skeleton in the current directory
 ```
 
 Generate an app skeleton using a template
@@ -26,7 +25,7 @@ Generate an app skeleton using a template
 ```sh
 mkdir testapp
 cd testapp
-. appgen
+appgen
 ```
 
 Generate an app using a sample configuration inferring the data schema from the CSV
@@ -67,34 +66,9 @@ Due By
 Status
 ```
 
-## Templates
+## How to use a generated app
 
-General app structure
-
-```text
-├── backend
-│   ├── api             # Business logic and API
-│   └── database        # Database layer
-│       ├── csv_seed    # CSV seed data in schema form
-│       ├── scripts     # db scripts
-│       └── sql         # SQL statements used by the db scripts
-├── configure
-│   ├── csv_raw         # CSV source data
-│   ├── generate-schema # use to generate the schema from CSV source data
-│   ├── schema_csv      # CSV seed data in schema form
-│   ├── schema_json     # JSON data schema
-│   ├── using-csv       # use to generate the application, schema, and seed data
-│   └── using-schema    # use to generate the application, and seed data
-├── docker              # docker scripts and helpers
-├── frontend            # Presentation layer
-└── pgdata              # Database mount point, contains the DB data
-```
-
-Some of these paths can be overridden.
-
-### Backend/API
-
-### Frontend
+[User Guide](./samples/README.md)
 
 ## Error Handling - fatal.txt
 

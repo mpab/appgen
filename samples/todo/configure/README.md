@@ -5,7 +5,7 @@ Transformation pipeline
 ## config/generate-schema
 
 ```sh
-. appgen-activate
+. appgen-venv
 raw-csv-to-schema ./config/csv_raw/PascalCase.csv
 
 ./config/csv_raw/PascalCase.csv

@@ -48,7 +48,7 @@ def exec(ctx):
         schema_properties.append(prop)
         schema_fields.append(f'"{e[0]}"')
 
-    with open(f"{ctx.COMPONENTS_CMD_PATH}/schema.json", "r") as file:
+    with open(f"{ctx.COMPONENTS_APP_PATH}/schema.json", "r") as file:
         filedata = file.read()
     # grep contents
     filedata = filedata.replace("__ENTITY_SNAKE__", ctx.ENTITY_SNAKE)

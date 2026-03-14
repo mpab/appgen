@@ -28,12 +28,31 @@ API <http://localhost:3000/api-docs>
 │   └── using-schema    # use to generate the application, and seed data
 ├── docker              # docker scripts and helpers
 ├── frontend            # Presentation layer
-└── pgdata              # Database mount point, contains the DB data
+├── pgdata              # Database mount point, contains the DB data
+└── tmux                # native scripts running inside tmux
 ```
 
-## Scripts and helpers
+## Scripts
 
-## Docker
+### Configuration tools
+
+```sh
+# CSV transformation pipelines
+# generate json schema
+config/generate-schema
+```
+
+```sh
+. appgen-venv
+raw-csv-to-schema ./config/csv_raw/PascalCase.csv
+
+./config/csv_raw/PascalCase.csv
+-> ./config/schema_csv/snake_case.csv
+-> ./config/schema_json/snake_case.json
+-> ./backend/database/csv_seed/snake_case.csv
+```
+
+### Docker
 
 ```sh
 # checks for docker, then runs any docker command
@@ -92,7 +111,7 @@ db-stop
 ./docker/ui
 ```
 
-## Native (depends on tmux / mise)
+### Native (depends on tmux / mise)
 
 ```sh
 # CAUTION: recursively search and remove node artifacts

@@ -1,9 +1,3 @@
-# project specific
-**/test_app/database**
-**/test_app/middleware**
-**/test_app/presentation**
-
-
 # temp files
 **/~$*
 

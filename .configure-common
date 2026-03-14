@@ -2,17 +2,34 @@
 
 (return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }
 
-export __APPGEN_HOME__="${1}"
+export __APPGEN_CMD_PATH__="${__APPGEN_HOME__}/app"
+[ ! -d "${__APPGEN_CMD_PATH__}" ] && echo "INVALID CMD PATH: ${__APPGEN_CMD_PATH__}" && return
 
+# DATABASE
+export __APPGEN_DB_PATH__="${__APPGEN_HOME__}/databases/${__APPGEN_PROFILE_DB__}"
+[ ! -d "${__APPGEN_DB_PATH__}" ] && echo "INVALID DATABASE PATH: ${__APPGEN_DB_PATH__}" && return
+export __APPGEN_DB_CMD_PATH__="${__APPGEN_HOME__}/app.db"
+[ ! -d "${__APPGEN_DB_CMD_PATH__}" ] && echo "INVALID DATABASE PATH: ${__APPGEN_DB_CMD_PATH__}" && return
+
+# API
+export __APPGEN_API_PATH__="${__APPGEN_HOME__}/backends/${__APPGEN_PROFILE_API__}"
+[ ! -d "${__APPGEN_API_PATH__}" ] && echo "INVALID API PATH: ${__APPGEN_API_PATH__}" && return
+export __APPGEN_API_CMD_PATH__="${__APPGEN_HOME__}/app.api"
+[ ! -d "${__APPGEN_API_CMD_PATH__}" ] && echo "INVALID API PATH: ${__APPGEN_API_CMD_PATH__}" && return
+
+# FRONTEND
 export __APPGEN_FE_PATH__="${__APPGEN_HOME__}/frontends/${__APPGEN_PROFILE_FE__}"
-export __APPGEN_BE_PATH__="${__APPGEN_HOME__}/backends/${__APPGEN_PROFILE_BE__}"
+[ ! -d "${__APPGEN_FE_PATH__}" ] && echo "INVALID FRONTEND PATH: ${__APPGEN_FE_PATH__}" && return
+export __APPGEN_FE_CMD_PATH__="${__APPGEN_HOME__}/app.ui"
+[ ! -d "${__APPGEN_FE_CMD_PATH__}" ] && echo "INVALID FRONTEND PATH: ${__APPGEN_FE_CMD_PATH__}" && return
 
-export __APPGEN_COMMON_PATH__="${__APPGEN_HOME__}/common"
-export __APPGEN_DB_PATH__="${__APPGEN_HOME__}/postgres"
+# pick up env.py from here too
+export __APPGEN_DB_JOBS_PATH__="${__APPGEN_DB_PATH__}/jobs"
+export __APPGEN_API_JOBS_PATH__="${__APPGEN_API_PATH__}/jobs"
+export __APPGEN_FE_JOBS_PATH__="${__APPGEN_FE_PATH__}/jobs"
 
-[ ! -d "${__APPGEN_FE_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_FE_PATH__}" && return
-[ ! -d "${__APPGEN_BE_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_BE_PATH__}" && return
-[ ! -d "${__APPGEN_COMMON_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_COMMON_PATH__}" && return
-[ ! -d "${__APPGEN_DB_PATH__}" ] && echo "INVALID PATH: ${__APPGEN_DB_PATH__}" && return
+export PATH="${__APPGEN_CMD_PATH__}:${__APPGEN_DB_JOBS_PATH__}:${__APPGEN_API_JOBS_PATH__}:${__APPGEN_FE_JOBS_PATH__}:${__APPGEN_DB_CMD_PATH__}:${__APPGEN_API_CMD_PATH__}:${__APPGEN_FE_CMD_PATH__}:${PATH}"
 
-export PATH="${__APPGEN_COMMON_PATH__}/jobs:${__APPGEN_BE_PATH__}/jobs:${__APPGEN_FE_PATH__}/jobs:${__APPGEN_DB_PATH__}/jobs:${PATH}"
+. appgen-venv
+
+appgen-info

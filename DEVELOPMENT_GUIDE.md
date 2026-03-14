@@ -12,9 +12,8 @@ export PATH="$PATH:${__APPGEN_HOME__}"
 
 ```sh
 # to create an appgen python environment
-# (must be sourced)
 
-. appgen # generates a basic application skeleton in the current directory
+appgen # generates a basic application skeleton in the current directory
 ```
 
 Sample CSV: Tasks.csv
@@ -35,7 +34,7 @@ Create a simple API endpoint using a csv file
 api-endpoint-crud Tasks.csv
 ```
 
-To generate a frontend page component, the API must be running
+To generate a non-schema frontend page component, the API must be running
 
 ```sh
 ./docker/backend-start
@@ -81,7 +80,7 @@ If this happens, inspect the file and correct the issue, then delete the error f
 - docker (for the database)
 - mise-en-place (mise)
 - python (for app component generation from a code template)
-- tmux (if running ./app-start)
+- tmux (if running ./tmux/* scripts)
 
 ## Schema Analysis
 
@@ -104,6 +103,12 @@ Assigned To
 Due By
 Status
 ```
+
+---
+
+## Template Application Samples
+
+[samples for application generation](./samples/README.md)
 
 ---
 

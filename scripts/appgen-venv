@@ -68,6 +68,4 @@ cd "${__APPGEN_HOME__}" || return
 python_activate
 cd "$THIS_DIR" || return
 
-echo "- app generation templates"
-echo "frontend: ${__APPGEN_FE_PATH__}"
-echo "backend:  ${__APPGEN_API_PATH__}"
+appgen-env
