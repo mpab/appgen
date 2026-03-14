@@ -15,5 +15,5 @@ chmod +x ./tmux/*
 echo "echo ${APPGEN_PROJECT_NAME}" > _app_name
 chmod +x ./_app*
 echo '(return 0 2>/dev/null) || { echo "$0: must be sourced"; exit 1; }' > appgen-select
-echo '. appgen-select-${__APPGEN_PROFILE_API__}-${__APPGEN_PROFILE_FE__}' >> appgen-select
+echo ". appgen-select-${__APPGEN_PROFILE_API__}-${__APPGEN_PROFILE_FE__}" >> appgen-select
 chmod +x ./app*
