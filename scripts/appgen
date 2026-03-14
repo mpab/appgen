@@ -6,26 +6,10 @@ try () {
     "$@" || return 1
 }
 
-FATAL_FILE="./fatal.txt"
-[ -f $FATAL_FILE ] && cat $FATAL_FILE && return 1
-
-PROJECT_SRC="$__APPGEN_CMD_PATH__"
-[ ! -d "$PROJECT_SRC" ] && echo "missing $PROJECT_SRC" > "$FATAL_FILE" && cat "$FATAL_FILE" && return 1
-
 OPT_QUIET="--quiet"
 
-# app-init
 try app-init "$OPT_QUIET"
-
-# app-new
-export APPGEN_PROJECT_NAME=${PWD##*/}
-echo "NAME=${APPGEN_PROJECT_NAME}" > ./docker/.env
-chmod +x ./docker/*
-chmod +x ./tmux/*
-
-echo "echo ${APPGEN_PROJECT_NAME}" > app-name
-chmod +x ./app*
-[ -f ./mise.toml ] && mise trust mise.toml
+try app-new "$OPT_QUIET"
 
 try db-init "$OPT_QUIET"
 try db-new "$OPT_QUIET"

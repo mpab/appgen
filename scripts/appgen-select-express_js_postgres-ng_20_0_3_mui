@@ -11,3 +11,4 @@ export __APPGEN_PROFILE_DB__="postgres"
 
 [ ! -f "${__APPGEN_HOME__}/.configure-common" ] && echo "$0: ${__APPGEN_HOME__}/.configure-common not found" && return 
 . "${__APPGEN_HOME__}/.configure-common" "${__APPGEN_HOME__}"
+

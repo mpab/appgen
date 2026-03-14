@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 { echo "\
-# App: $(./app-name)
+# App: $(./_app_name)
 
 ## Usage
 

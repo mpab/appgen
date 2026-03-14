@@ -28,3 +28,12 @@ echo "APPGEN_HOME=${__APPGEN_HOME__}"
 echo "DB=${__APPGEN_PROFILE_DB__}"
 echo "API=${__APPGEN_PROFILE_API__}"
 echo "FE=${__APPGEN_PROFILE_FE__}"
+echo "appgen-select: appgen-select-${__APPGEN_PROFILE_API__}-${__APPGEN_PROFILE_FE__}"
+
+FATAL_FILE="./fatal.txt"
+
+if [ -f $FATAL_FILE ]; then
+    cat $FATAL_FILE
+    [ $is_sourced -eq 1 ] && return 1
+    exit 1
+fi

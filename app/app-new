@@ -1,39 +1,18 @@
 #!/usr/bin/env bash
 
+appgen-info || exit
+
 try () {
-    "$@" || exit 1
+    "$@" || return 1
 }
 
-FATAL_FILE="./fatal.txt"
-[ -f $FATAL_FILE ] && cat $FATAL_FILE && return 1
-
-. appgen-venv
-
-PROJECT_SRC="$__APPGEN_CMD_PATH__"
-[ ! -d "$PROJECT_SRC" ] && echo "missing $PROJECT_SRC" > "$FATAL_FILE" && cat "$FATAL_FILE" && return 1
-
-OPT_QUIET="--quiet"
-
-# app-init
-try app-init "$OPT_QUIET"
-
-
-# app-new
+# 2-phase creation/customization: part 2
 export APPGEN_PROJECT_NAME=${PWD##*/}
 echo "NAME=${APPGEN_PROJECT_NAME}" > ./docker/.env
 chmod +x ./docker/*
 chmod +x ./tmux/*
 
-echo "echo ${APPGEN_PROJECT_NAME}" > app-name
+echo "echo ${APPGEN_PROJECT_NAME}" > _app_name
+chmod +x ./_app*
+echo "appgen-select-${__APPGEN_PROFILE_API__}-${__APPGEN_PROFILE_FE__}" > appgen-select
 chmod +x ./app*
-[ -f ./mise.toml ] && mise trust mise.toml
-
-try db-init "$OPT_QUIET"
-try db-new "$OPT_QUIET"
-
-try api-init "$OPT_QUIET"
-try api-new "$OPT_QUIET"
-
-try ui-init "$OPT_QUIET"
-try ui-new "$OPT_QUIET"
-try ui-customize "$OPT_QUIET" # 2-phase ui creation/customization
