@@ -12,9 +12,11 @@ SCHEMA_DIR="${0%/*}/schema_json"
 # ensure seed data can be found
 CSV_DIR="${0%/*}/csv_raw"
 generate() {
-    # processes the csv files in ./csv
-    # - generates json schemas in ./schema
-    # - generates csv seed files in ./backend/database/csv_seed
+    # processes the csv files in ./csv_raw
+    # - generates json schemas in ./schema_json
+    # - generates csv seed files (enum columns replaced with references)
+    # - copies the csv seed files to ./schema_csv
+    # - copies the csv seed files to ./backend/database/csv_seed
     # - generates scripts in ./backend/database/scripts
     # - generates sql in ./backend/database/sql
     try raw-csv-to-schema "${CSV_DIR}/${1}.csv" --quiet
