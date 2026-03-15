@@ -2,17 +2,17 @@
 
 ## Application and component generation
 
-__APPGEN_HOME__ must be defined and on the path
+__APPGEN_HOME__ must be defined and ${__APPGEN_HOME__}/scripts on the path
 
 ```sh
 # example .bashrc appgen configuration
 export __APPGEN_HOME__="$HOME/appgen"
-export PATH="$PATH:${__APPGEN_HOME__}"
+export PATH="$PATH:${__APPGEN_HOME__}/scripts"
 ```
 
 ```sh
-# to create an appgen python environment
-
+# select an appgen environment
+. appgen-select-*
 appgen # generates a basic application skeleton in the current directory
 ```
 

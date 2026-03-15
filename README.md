@@ -15,8 +15,8 @@ export PATH="$PATH:${__APPGEN_HOME__}/scripts"
 ```
 
 ```sh
-# to create an appgen python environment
-
+# select an appgen environment
+. appgen-select-*
 appgen # generates a basic application skeleton in the current directory
 ```
 
